@@ -1,0 +1,10 @@
+# Python cache files
+__pycache__/
+*.py[cod]
+
+# Local SQLite database folder
+instance/
+
+# Editor and environment files
+.vscode/
+.env
