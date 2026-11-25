@@ -1,0 +1,267 @@
+* { /* Apply box rules to every element */
+  box-sizing: border-box; /* Include padding & border inside width */
+  margin: 0; /* Remove default outer spacing */
+  padding: 0; /* Remove default inner spacing */
+}
+
+body { /* Base page styling */
+  font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif; /* Clean OS font stack */
+  background-color: #f4f6f9; /* Light gray page background */
+  color: #1f2937; /* Dark gray readable text */
+  line-height: 1.5; /* Comfortable spacing between text lines */
+}
+
+.container { /* Shared centered page wrapper */
+  max-width: 960px; /* Keep content at readable max width */
+  margin: 0 auto; /* Center horizontally */
+  padding: 0 16px; /* Small left/right padding on mobile */
+}
+
+/* Navbar */
+.navbar { /* Top navigation bar */
+  background-color: #ffffff; /* White background */
+  border-bottom: 1px solid #e5e7eb; /* Subtle bottom divider line */
+  padding: 14px 0; /* Top and bottom spacing */
+  margin-bottom: 24px; /* Space below navbar */
+}
+
+.nav-content { /* Align brand and links inside navbar */
+  display: flex; /* Put items side by side */
+  justify-content: space-between; /* Brand on left, links on right */
+  align-items: center; /* Vertically center items */
+}
+
+.brand { /* Top-left portal title */
+  font-size: 1.15rem; /* Slightly larger text */
+  font-weight: 700; /* Bold text */
+  color: #111827; /* Very dark text */
+  text-decoration: none; /* Remove underline */
+}
+
+.nav-links { /* Wrapper for Dashboard / Students links */
+  display: flex; /* Place links in a row */
+  gap: 16px; /* Space between links */
+}
+
+.nav-links a { /* Default link styling */
+  text-decoration: none; /* Remove underline */
+  color: #4b5563; /* Medium gray text */
+  font-weight: 500; /* Medium boldness */
+  padding: 6px 12px; /* Clickable padding */
+  border-radius: 6px; /* Rounded pill corners */
+}
+
+.nav-links a:hover,
+.nav-links a.active { /* Highlight hovered or current page link */
+  background-color: #eff6ff; /* Soft blue background */
+  color: #2563eb; /* Blue text */
+}
+
+.main-content { /* Main page body wrapper */
+  padding-bottom: 40px; /* Extra space at bottom of page */
+}
+
+.page-header { /* Title + action button row */
+  display: flex; /* Side-by-side layout */
+  justify-content: space-between; /* Title left, button right */
+  align-items: center; /* Vertically centered */
+  margin-bottom: 20px; /* Space below header */
+}
+
+.page-header h1 { /* Main page heading */
+  font-size: 1.5rem; /* Heading size */
+  color: #111827; /* Dark heading color */
+}
+
+/* Cards */
+.card { /* White box container for forms and tables */
+  background-color: #ffffff; /* White background */
+  border: 1px solid #e5e7eb; /* Light gray border */
+  border-radius: 8px; /* Rounded corners */
+  padding: 20px; /* Inner spacing */
+  margin-bottom: 20px; /* Space between cards */
+}
+
+.card h2 { /* Card section heading */
+  font-size: 1.1rem; /* Section title size */
+  margin-bottom: 14px; /* Space below heading */
+  color: #111827; /* Dark text */
+}
+
+/* Stats */
+.stats-grid { /* Grid for dashboard stat cards */
+  display: grid; /* CSS Grid layout */
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); /* Auto-fit columns cleanly */
+  gap: 16px; /* Space between stat cards */
+  margin-bottom: 20px; /* Space below stats grid */
+}
+
+.stat-card { /* Single dashboard metric box */
+  background-color: #ffffff; /* White background */
+  border: 1px solid #e5e7eb; /* Light gray border */
+  border-radius: 8px; /* Rounded corners */
+  padding: 20px; /* Inner spacing */
+}
+
+.stat-label { /* Metric title text */
+  font-size: 0.9rem; /* Slightly smaller text */
+  color: #6b7280; /* Muted gray */
+  margin-bottom: 6px; /* Space above number */
+}
+
+.stat-value { /* Big metric number */
+  font-size: 2rem; /* Large number size */
+  font-weight: 700; /* Bold number */
+  color: #2563eb; /* Blue highlight color */
+}
+
+/* Forms */
+.student-form { /* Responsive grid for Add Student inputs */
+  display: grid; /* CSS Grid layout */
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); /* Fit inputs side by side */
+  gap: 12px; /* Space between inputs */
+  align-items: end; /* Align button with bottom of inputs */
+}
+
+.form-group { /* Label + input stack */
+  display: flex; /* Flex layout */
+  flex-direction: column; /* Stack label above input */
+  gap: 6px; /* Space between label and input */
+}
+
+.form-group label { /* Input label text */
+  font-size: 0.875rem; /* Small label size */
+  font-weight: 500; /* Medium boldness */
+  color: #374151; /* Dark gray */
+}
+
+input[type="text"],
+input[type="email"],
+input[type="search"] { /* Style all text, email, and search boxes */
+  width: 100%; /* Fill full column width */
+  padding: 9px 12px; /* Comfortable inner padding */
+  border: 1px solid #d1d5db; /* Gray border */
+  border-radius: 6px; /* Rounded input corners */
+  font-size: 0.95rem; /* Input text size */
+}
+
+input:focus { /* Highlight input when typing in it */
+  outline: none; /* Remove default browser outline */
+  border-color: #2563eb; /* Blue border on focus */
+}
+
+/* Buttons */
+.btn { /* Base button styling */
+  display: inline-block; /* Allow padding and width */
+  padding: 9px 16px; /* Button padding */
+  font-size: 0.9rem; /* Button text size */
+  font-weight: 500; /* Medium bold text */
+  border: none; /* Remove default border */
+  border-radius: 6px; /* Rounded corners */
+  cursor: pointer; /* Show hand pointer on hover */
+  text-decoration: none; /* No underline on link buttons */
+  text-align: center; /* Center label */
+}
+
+.btn-primary { /* Blue primary action button */
+  background-color: #2563eb; /* Blue background */
+  color: #ffffff; /* White text */
+}
+
+.btn-primary:hover { /* Darker blue when hovering */
+  background-color: #1d4ed8; /* Darker blue */
+}
+
+.btn-danger { /* Soft red delete button */
+  background-color: #fee2e2; /* Light red background */
+  color: #dc2626; /* Red text */
+  padding: 6px 12px; /* Smaller button padding */
+  font-size: 0.85rem; /* Slightly smaller text */
+}
+
+.btn-danger:hover { /* Slightly deeper red on hover */
+  background-color: #fecaca; /* Darker pink/red */
+}
+
+/* Table */
+.table-header { /* Row above student table */
+  display: flex; /* Put title and search side by side */
+  justify-content: space-between; /* Push apart */
+  align-items: center; /* Vertically center */
+  gap: 12px; /* Space between items */
+  flex-wrap: wrap; /* Wrap to next line on small screens */
+  margin-bottom: 14px; /* Space above table */
+}
+
+.table-header h2 { /* Remove bottom margin inside flex header */
+  margin-bottom: 0; /* No extra margin */
+}
+
+.search-box { /* Limit width of search box */
+  max-width: 260px; /* Keep search bar compact */
+}
+
+.table-wrapper { /* Enable horizontal scrolling on mobile */
+  overflow-x: auto; /* Scroll sideways if table is wide */
+}
+
+table { /* Student table */
+  width: 100%; /* Full card width */
+  border-collapse: collapse; /* Merge cell borders cleanly */
+}
+
+th,
+td { /* Table header and body cells */
+  text-align: left; /* Left-align text */
+  padding: 12px 10px; /* Cell spacing */
+  border-bottom: 1px solid #e5e7eb; /* Row divider line */
+  font-size: 0.92rem; /* Cell font size */
+}
+
+th { /* Table header cells */
+  font-weight: 600; /* Semi-bold headers */
+  color: #4b5563; /* Gray header text */
+  background-color: #f9fafb; /* Very light gray header background */
+}
+
+.empty-state { /* Text shown when list/search is empty */
+  color: #6b7280; /* Muted gray */
+  font-size: 0.95rem; /* Readable size */
+  padding: 12px 0; /* Top and bottom spacing */
+}
+
+/* Alerts */
+.alerts { /* Flash message container */
+  margin-bottom: 16px; /* Space below alerts */
+}
+
+.alert { /* Single flash alert banner */
+  display: flex; /* Put message and close button on one row */
+  justify-content: space-between; /* Message left, X button right */
+  align-items: center; /* Vertically center */
+  padding: 12px 16px; /* Banner padding */
+  border-radius: 6px; /* Rounded banner corners */
+  margin-bottom: 8px; /* Space between stacked alerts */
+  font-size: 0.92rem; /* Alert text size */
+}
+
+.alert-success { /* Green success alert */
+  background-color: #dcfce7; /* Light green background */
+  color: #166534; /* Dark green text */
+  border: 1px solid #bbf7d0; /* Green border */
+}
+
+.alert-error { /* Red error alert */
+  background-color: #fee2e2; /* Light red background */
+  color: #991b1b; /* Dark red text */
+  border: 1px solid #fecaca; /* Red border */
+}
+
+.alert-close { /* 'X' button inside alert */
+  background: none; /* Transparent background */
+  border: none; /* No border */
+  font-size: 1.2rem; /* Slightly larger X */
+  line-height: 1; /* Tight height */
+  cursor: pointer; /* Hand cursor */
+  color: inherit; /* Match alert text color */
+}

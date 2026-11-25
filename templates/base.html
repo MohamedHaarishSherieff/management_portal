@@ -1,0 +1,41 @@
+<!DOCTYPE html> <!-- Tell browser this is an HTML5 page -->
+<html lang="en"> <!-- Root HTML element in English -->
+<head> <!-- Page metadata and stylesheet links -->
+  <meta charset="UTF-8"> <!-- Support standard text characters -->
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"> <!-- Scale nicely on mobile screens -->
+  <title>{% block title %}Student Management System{% endblock %}</title> <!-- Page tab title (child pages can override) -->
+  <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}"> <!-- Load CSS file from static/style.css -->
+</head>
+<body> <!-- Visible page body starts here -->
+  <header class="navbar"> <!-- Top white navigation bar -->
+    <div class="container nav-content"> <!-- Centered container for brand and nav links -->
+      <a href="{{ url_for('dashboard') }}" class="brand">MEVI Student CRM</a> <!-- Brand title linking to home dashboard -->
+      <nav class="nav-links"> <!-- Navigation menu links -->
+        <!-- Link to Dashboard; add 'active' class if currently on dashboard -->
+        <a href="{{ url_for('dashboard') }}" class="{% if request.endpoint == 'dashboard' %}active{% endif %}">Dashboard</a>
+        <!-- Link to Students page; add 'active' class if currently on students -->
+        <a href="{{ url_for('students') }}" class="{% if request.endpoint == 'students' %}active{% endif %}">Students</a>
+      </nav>
+    </div>
+  </header>
+
+  <main class="container main-content"> <!-- Main centered page content area -->
+    {% with messages = get_flashed_messages(with_categories=true) %} <!-- Read any Flask flash messages -->
+      {% if messages %} <!-- Only show alert area if messages exist -->
+        <div class="alerts"> <!-- Wrapper for alert banners -->
+          {% for category, message in messages %} <!-- Loop through each message and its type -->
+            <div class="alert alert-{{ category }}"> <!-- Alert styled as success or error -->
+              <span>{{ message }}</span> <!-- Display the message text -->
+              <button type="button" class="alert-close" aria-label="Close">&times;</button> <!-- 'X' button handled by script.js -->
+            </div>
+          {% endfor %} <!-- End message loop -->
+        </div>
+      {% endif %} <!-- End messages check -->
+    {% endwith %} <!-- End flash messages block -->
+
+    {% block content %}{% endblock %} <!-- Placeholder where child pages put their HTML -->
+  </main>
+
+  <script src="{{ url_for('static', filename='script.js') }}"></script> <!-- Load JavaScript file from static/script.js -->
+</body>
+</html>

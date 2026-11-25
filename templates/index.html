@@ -1,0 +1,49 @@
+{% extends "base.html" %} <!-- Reuse navbar, alerts, CSS, and JS from base.html -->
+
+{% block title %}Dashboard - Student Management System{% endblock %} <!-- Set browser tab title -->
+
+{% block content %} <!-- Start main content block -->
+<div class="page-header"> <!-- Top row with page title and button -->
+  <h1>Dashboard</h1> <!-- Main page heading -->
+  <a href="{{ url_for('students') }}" class="btn btn-primary">Manage Students</a> <!-- Button linking to /students -->
+</div>
+
+<div class="stats-grid"> <!-- Responsive grid holding summary cards -->
+  <div class="stat-card"> <!-- First summary card -->
+    <div class="stat-label">Total Students</div> <!-- Card title -->
+    <div class="stat-value">{{ total_students }}</div> <!-- Number passed from Flask dashboard() -->
+  </div>
+  <div class="stat-card"> <!-- Second summary card -->
+    <div class="stat-label">Total Courses</div> <!-- Card title -->
+    <div class="stat-value">{{ total_courses }}</div> <!-- Number passed from Flask dashboard() -->
+  </div>
+</div>
+
+<div class="card"> <!-- White card for recent students table -->
+  <h2>Recent Students</h2> <!-- Section heading -->
+  {% if recent_students %} <!-- Check if there is at least one student -->
+    <div class="table-wrapper"> <!-- Allow horizontal scroll on small screens -->
+      <table> <!-- Table showing the 5 latest students -->
+        <thead> <!-- Table column headers -->
+          <tr>
+            <th>Name</th> <!-- Name column -->
+            <th>Email</th> <!-- Email column -->
+            <th>Course</th> <!-- Course column -->
+          </tr>
+        </thead>
+        <tbody> <!-- Table data rows -->
+          {% for student in recent_students %} <!-- Loop over each student from Flask -->
+            <tr>
+              <td>{{ student.name }}</td> <!-- Student's name -->
+              <td>{{ student.email }}</td> <!-- Student's email -->
+              <td>{{ student.course }}</td> <!-- Student's course -->
+            </tr>
+          {% endfor %} <!-- End student loop -->
+        </tbody>
+      </table>
+    </div>
+  {% else %} <!-- Shown when database has 0 students -->
+    <p class="empty-state">No students added yet. Go to the Students page to add one.</p> <!-- Friendly empty message -->
+  {% endif %} <!-- End recent_students check -->
+</div>
+{% endblock %} <!-- End main content block -->
