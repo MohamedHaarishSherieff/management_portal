@@ -4,9 +4,16 @@ __pycache__/
 venv/
 .venv/
 
-# Local SQLite database folder
+# Local database files
 instance/
+*.db
+*.sqlite
+*.sqlite3
 
-# Editor and environment files
+# Editor, secrets, and SSH/private keys
 .vscode/
 .env
+.env.*
+*.pem
+*.key
+*.ppk
