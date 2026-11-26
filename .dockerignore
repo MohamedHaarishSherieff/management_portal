@@ -1,5 +1,7 @@
+venv/
 __pycache__/
 *.pyc
-instance/
 .git/
-.vscode/
+.pytest_cache/
+instance/
+.env

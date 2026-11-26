@@ -52,6 +52,9 @@ def init_db():  # Create the 'students' table if it does not exist yet
         """)
 
 
+init_db()  # Ensure database table exists even when started via Gunicorn
+
+
 # Dashboard
 @app.route("/")  # Handle GET requests to the home page '/'
 def dashboard():  # Render dashboard summary page

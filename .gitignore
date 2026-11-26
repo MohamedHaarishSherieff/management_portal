@@ -1,6 +1,8 @@
-# Python cache files
+# Python cache and virtual environment
 __pycache__/
 *.py[cod]
+venv/
+.venv/
 
 # Local SQLite database folder
 instance/
