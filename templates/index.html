@@ -1,49 +1,64 @@
-{% extends "base.html" %} <!-- Reuse navbar, alerts, CSS, and JS from base.html -->
+{% extends "base.html" %}
 
-{% block title %}Dashboard - Student Management System{% endblock %} <!-- Set browser tab title -->
+{% block title %}Dashboard - Student Management System{% endblock %}
 
-{% block content %} <!-- Start main content block -->
-<div class="page-header"> <!-- Top row with page title and button -->
-  <h1>Dashboard</h1> <!-- Main page heading -->
-  <a href="{{ url_for('students') }}" class="btn btn-primary">Manage Students</a> <!-- Button linking to /students -->
+{% block content %}
+<!-- Page heading and primary button -->
+<div class="page-header">
+  <div>
+    <h1>Dashboard</h1>
+    <p class="subtitle">Overview of enrolled students and active courses.</p>
+  </div>
+  <a href="{{ url_for('students') }}" class="btn btn-primary">Manage Students</a>
 </div>
 
-<div class="stats-grid"> <!-- Responsive grid holding summary cards -->
-  <div class="stat-card"> <!-- First summary card -->
-    <div class="stat-label">Total Students</div> <!-- Card title -->
-    <div class="stat-value">{{ total_students }}</div> <!-- Number passed from Flask dashboard() -->
+<!-- Summary stat cards -->
+<div class="stats-grid">
+  <div class="stat-card">
+    <div class="stat-label">Total Students</div>
+    <div class="stat-value">{{ total_students }}</div>
   </div>
-  <div class="stat-card"> <!-- Second summary card -->
-    <div class="stat-label">Total Courses</div> <!-- Card title -->
-    <div class="stat-value">{{ total_courses }}</div> <!-- Number passed from Flask dashboard() -->
+
+  <div class="stat-card">
+    <div class="stat-label">Total Courses</div>
+    <div class="stat-value">{{ total_courses }}</div>
   </div>
 </div>
 
-<div class="card"> <!-- White card for recent students table -->
-  <h2>Recent Students</h2> <!-- Section heading -->
-  {% if recent_students %} <!-- Check if there is at least one student -->
-    <div class="table-wrapper"> <!-- Allow horizontal scroll on small screens -->
-      <table> <!-- Table showing the 5 latest students -->
-        <thead> <!-- Table column headers -->
+<!-- Latest 5 students card -->
+<div class="card">
+  <div class="card-header">
+    <h2>Recent Students</h2>
+    <a href="{{ url_for('students') }}" class="text-link">View all &rarr;</a>
+  </div>
+
+  {% if recent_students %}
+    <div class="table-wrapper">
+      <table>
+        <thead>
           <tr>
-            <th>Name</th> <!-- Name column -->
-            <th>Email</th> <!-- Email column -->
-            <th>Course</th> <!-- Course column -->
+            <th>Name</th>
+            <th>Email</th>
+            <th>Course</th>
           </tr>
         </thead>
-        <tbody> <!-- Table data rows -->
-          {% for student in recent_students %} <!-- Loop over each student from Flask -->
+        <tbody>
+          {% for student in recent_students %}
             <tr>
-              <td>{{ student.name }}</td> <!-- Student's name -->
-              <td>{{ student.email }}</td> <!-- Student's email -->
-              <td>{{ student.course }}</td> <!-- Student's course -->
+              <td class="fw-medium">{{ student.name }}</td>
+              <td class="text-muted">{{ student.email }}</td>
+              <td><span class="course-badge">{{ student.course }}</span></td>
             </tr>
-          {% endfor %} <!-- End student loop -->
+          {% endfor %}
         </tbody>
       </table>
     </div>
-  {% else %} <!-- Shown when database has 0 students -->
-    <p class="empty-state">No students added yet. Go to the Students page to add one.</p> <!-- Friendly empty message -->
-  {% endif %} <!-- End recent_students check -->
+  {% else %}
+    <!-- Shown when there are no students yet -->
+    <div class="empty-state">
+      <p>No students added yet.</p>
+      <a href="{{ url_for('students') }}" class="text-link">Add your first student &rarr;</a>
+    </div>
+  {% endif %}
 </div>
-{% endblock %} <!-- End main content block -->
+{% endblock %}

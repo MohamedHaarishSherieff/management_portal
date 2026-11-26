@@ -1,36 +1,43 @@
-{% extends "base.html" %} <!-- Reuse navbar, alerts, CSS, and JS from base.html -->
+{% extends "base.html" %}
 
-{% block title %}Students - Student Management System{% endblock %} <!-- Set browser tab title -->
+{% block title %}Students - Student Management System{% endblock %}
 
-{% block content %} <!-- Start main content block -->
-<div class="page-header"> <!-- Top row with page title -->
-  <h1>Students</h1> <!-- Main page heading -->
+{% block content %}
+<!-- Page heading -->
+<div class="page-header">
+  <div>
+    <h1>Students</h1>
+    <p class="subtitle">Add, search, and remove student records.</p>
+  </div>
 </div>
 
-<div class="card"> <!-- Card containing the Add Student form -->
-  <h2>Add New Student</h2> <!-- Card heading -->
-  <!-- Form sends POST request to Flask add_student() route -->
+<!-- Add student form card -->
+<div class="card">
+  <h2>Add New Student</h2>
   <form id="addStudentForm" class="student-form" action="{{ url_for('add_student') }}" method="POST">
-    <div class="form-group"> <!-- Label + input wrapper for Name -->
-      <label for="name">Name</label> <!-- Label linked to 'name' input -->
-      <input type="text" id="name" name="name" placeholder="e.g. Aisha Khan" required> <!-- Text input for student name -->
+    <div class="form-group">
+      <label for="name">Full Name</label>
+      <input type="text" id="name" name="name" placeholder="e.g. Aisha Khan" required>
     </div>
-    <div class="form-group"> <!-- Label + input wrapper for Email -->
-      <label for="email">Email</label> <!-- Label linked to 'email' input -->
-      <input type="email" id="email" name="email" placeholder="e.g. aisha@example.com" required> <!-- Email input with browser check -->
+
+    <div class="form-group">
+      <label for="email">Email Address</label>
+      <input type="email" id="email" name="email" placeholder="e.g. aisha@example.com" required>
     </div>
-    <div class="form-group"> <!-- Label + input wrapper for Course -->
-      <label for="course">Course</label> <!-- Label linked to 'course' input -->
-      <input type="text" id="course" name="course" placeholder="e.g. Computer Science" required> <!-- Text input for course -->
+
+    <div class="form-group">
+      <label for="course">Course</label>
+      <input type="text" id="course" name="course" placeholder="e.g. Computer Science" required>
     </div>
-    <button type="submit" class="btn btn-primary">Add Student</button> <!-- Submit button to save student -->
+
+    <button type="submit" class="btn btn-primary">Add Student</button>
   </form>
 </div>
 
-<div class="card"> <!-- Card containing the Student List table -->
-  <div class="table-header"> <!-- Top bar with count and search box -->
-    <h2>Student List (<span id="studentCount">{{ students|length }}</span>)</h2> <!-- Heading with live student count -->
-    <!-- Search input used by script.js to filter table rows live -->
+<!-- Student directory table card -->
+<div class="card">
+  <div class="table-header">
+    <h2>Student List (<span id="studentCount">{{ students|length }}</span>)</h2>
     <input
       type="search"
       id="searchInput"
@@ -40,43 +47,44 @@
     >
   </div>
 
-  {% if students %} <!-- Show table only if at least one student exists -->
-    <div class="table-wrapper"> <!-- Allow horizontal scroll on narrow screens -->
-      <table id="studentsTable"> <!-- Table targeted by script.js search -->
-        <thead> <!-- Table header row -->
+  {% if students %}
+    <div class="table-wrapper">
+      <table id="studentsTable">
+        <thead>
           <tr>
-            <th>Name</th> <!-- Name column -->
-            <th>Email</th> <!-- Email column -->
-            <th>Course</th> <!-- Course column -->
-            <th>Action</th> <!-- Delete button column -->
+            <th>Name</th>
+            <th>Email</th>
+            <th>Course</th>
+            <th class="text-right">Action</th>
           </tr>
         </thead>
-        <tbody> <!-- Table body rows -->
-          {% for student in students %} <!-- Loop through all students from Flask -->
+        <tbody>
+          {% for student in students %}
             <tr>
-              <td>{{ student.name }}</td> <!-- Student's name -->
-              <td>{{ student.email }}</td> <!-- Student's email -->
-              <td>{{ student.course }}</td> <!-- Student's course -->
-              <td>
-                <!-- Mini form that sends POST to delete_student() for this ID -->
+              <td class="fw-medium">{{ student.name }}</td>
+              <td class="text-muted">{{ student.email }}</td>
+              <td><span class="course-badge">{{ student.course }}</span></td>
+              <td class="text-right">
                 <form
                   class="delete-form"
                   action="{{ url_for('delete_student', student_id=student.id) }}"
                   method="POST"
                   data-student-name="{{ student.name }}"
                 >
-                  <button type="submit" class="btn btn-danger">Delete</button> <!-- Red delete button -->
+                  <button type="submit" class="btn btn-danger">Delete</button>
                 </form>
               </td>
             </tr>
-          {% endfor %} <!-- End student loop -->
+          {% endfor %}
         </tbody>
       </table>
     </div>
-    <!-- Hidden message shown by script.js when search finds 0 rows -->
+
+    <!-- Shown by script.js when live search finds 0 rows -->
     <p id="noMatches" class="empty-state" style="display: none;">No matching students found.</p>
-  {% else %} <!-- Shown when database has 0 students -->
-    <p class="empty-state">No students registered yet. Use the form above to add your first student.</p> <!-- Empty state message -->
-  {% endif %} <!-- End students check -->
+  {% else %}
+    <!-- Shown when database has no students -->
+    <p class="empty-state">No students registered yet. Use the form above to add your first student.</p>
+  {% endif %}
 </div>
-{% endblock %} <!-- End main content block -->
+{% endblock %}
